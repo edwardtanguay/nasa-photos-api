@@ -15,11 +15,14 @@ function App() {
 				const data = response.data;
 				const imageName = data['0'].image + '.jpg';
 				const caption = data['0'].caption;
+				const date = data['0'].date;
+
 
 				setPhotoObjects([
 					{
 						imageName,
-						caption
+						caption,
+						date
 					}
 				]);
 			}
@@ -36,8 +39,7 @@ function App() {
 				{photoObjects.map((obj, i) => {
 					return (
 						<div key={i}>
-							<div>{obj.caption}
-							</div>
+							<div>{obj.caption} - {obj.date} </div>
 							<img src={`https://epic.gsfc.nasa.gov/archive/natural/2022/02/14/jpg/${obj.imageName}`} alt="" />
 						</div>
 					)
