@@ -17,9 +17,7 @@ function App() {
 			const response = await axios.get(url);
 			const data = response.data;
 			const day = date1.substring(8, 11);
-			console.log(day);
 			const imageUrlName = `https://epic.gsfc.nasa.gov/archive/natural/2022/01/${day}/jpg/${data['0'].image}.jpg`;
-			console.log(imageUrlName);
 			const caption = data['0'].caption;
 			const date = data['0'].date;
 			return {
@@ -36,24 +34,29 @@ function App() {
 	useEffect(() => {
 		// IIFE - https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 		(async () => {
-			const photoObj = await getApiData('2022-01-12');
-			setPhotoObjects([photoObj]);
+			const _photoObjects = [];
+			for (let i = 10; i <= 15; i++) {
+				const date = `2022-01-${i}`;
+				const photoObj = await getApiData(date);
+				_photoObjects.push(photoObj);
+			}
+			setPhotoObjects(_photoObjects);
 		})();
 	}, []);
 
 	return (
 		<div className="App">
 			<h1>NASA Images</h1>
-			<div className="photos">
-				{photoObjects.map((obj, i) => {
-					return (
+			{photoObjects.map((obj, i) => {
+				return (
+					<div className="photos">
 						<div key={i}>
 							<div>{obj.caption} - {obj.date} </div>
 							<img src={obj.imageUrlName} alt="" />
 						</div>
-					)
-				})}
-			</div>
+					</div>
+				)
+			})}
 		</div>
 	);
 }
