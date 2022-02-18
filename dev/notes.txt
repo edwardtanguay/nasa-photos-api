@@ -4,8 +4,16 @@
 - x get image via axios from NASA API and show it
 - x IIFE
 - x try/catch
-- .. show one day image with caption/date, small size
-- get all 7 days from previous week
+- x show one day image with caption/date, small size
+- .. get all 7 days from previous week
+	- 2020-01-10
+		- https://epic.gsfc.nasa.gov/api/natural/date/2022-01-10
+		- https://epic.gsfc.nasa.gov/api/natural/date/2022-01-11
+		- https://epic.gsfc.nasa.gov/api/natural/date/2022-01-12
+		- https://epic.gsfc.nasa.gov/api/natural/date/2022-01-13
+		- https://epic.gsfc.nasa.gov/api/natural/date/2022-01-14
+		- https://epic.gsfc.nasa.gov/api/natural/date/2022-01-15
+		- https://epic.gsfc.nasa.gov/api/natural/date/2022-01-16
 
 - use https://getbootstrap.com/docs/5.1/components/carousel
 - react-images-viewer

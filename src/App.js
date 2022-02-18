@@ -2,33 +2,42 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.scss';
 
-const nasaUrl = 'https://epic.gsfc.nasa.gov/api/natural/date/2022-02-14';
+// const startDate = '2022-01-10';
+
+// const nasaUrl = 'https://epic.gsfc.nasa.gov/api/natural/date/2022-01-10';
+// const nasaUrl = 'https://epic.gsfc.nasa.gov/api/natural/date/2022-02-11';
+// const nasaUrl = 'https://epic.gsfc.nasa.gov/api/natural/date/2022-02-12';
 
 function App() {
 	const [photoObjects, setPhotoObjects] = useState([]);
 
+	const getApiData = async (date1) => {
+		try {
+			const url = `https://epic.gsfc.nasa.gov/api/natural/date/${date1}`;
+			const response = await axios.get(url);
+			const data = response.data;
+			const day = date1.substring(8, 11);
+			console.log(day);
+			const imageUrlName = `https://epic.gsfc.nasa.gov/archive/natural/2022/01/${day}/jpg/${data['0'].image}.jpg`;
+			console.log(imageUrlName);
+			const caption = data['0'].caption;
+			const date = data['0'].date;
+			return {
+				imageUrlName,
+				caption,
+				date
+			};
+		}
+		catch (err) {
+			console.error(err);
+		}
+	}
+
 	useEffect(() => {
 		// IIFE - https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 		(async () => {
-			try {
-				const response = await axios.get(nasaUrl);
-				const data = response.data;
-				const imageName = data['0'].image + '.jpg';
-				const caption = data['0'].caption;
-				const date = data['0'].date;
-
-
-				setPhotoObjects([
-					{
-						imageName,
-						caption,
-						date
-					}
-				]);
-			}
-			catch (err) {
-				console.error(err);
-			}
+			const photoObj = await getApiData('2022-01-12');
+			setPhotoObjects([photoObj]);
 		})();
 	}, []);
 
@@ -40,7 +49,7 @@ function App() {
 					return (
 						<div key={i}>
 							<div>{obj.caption} - {obj.date} </div>
-							<img src={`https://epic.gsfc.nasa.gov/archive/natural/2022/02/14/jpg/${obj.imageName}`} alt="" />
+							<img src={obj.imageUrlName} alt="" />
 						</div>
 					)
 				})}
