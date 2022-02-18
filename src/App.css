@@ -34,6 +34,12 @@ body {
   margin: 0 0 0 30px;
 }
 
-.App ul.photos img {
-  width: 100px;
+.App div.photos {
+  background: #000;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.App div.photos img {
+  width: 100%;
 }

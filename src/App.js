@@ -32,15 +32,17 @@ function App() {
 	return (
 		<div className="App">
 			<h1>NASA Images</h1>
-			<ul className="photos">
+			<div className="photos">
 				{photoObjects.map((obj, i) => {
 					return (
-						<li key={i}>{obj.caption}
+						<div key={i}>
+							<div>{obj.caption}
+							</div>
 							<img src={`https://epic.gsfc.nasa.gov/archive/natural/2022/02/14/jpg/${obj.imageName}`} alt="" />
-						</li>
+						</div>
 					)
 				})}
-			</ul>
+			</div>
 		</div>
 	);
 }
